@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  laravel-app:
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile
+    volumes:
+      - ./laravel:/var/www
+    ports:
+      - "8000:8000"
+
+  nextjs-app:
+    build:
+      context: ./next
+      dockerfile: Dockerfile
+    volumes:
+      - ./next:/app
+    ports:
+      - "3000:3000"
