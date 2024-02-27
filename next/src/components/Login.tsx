@@ -13,7 +13,7 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
 
-    // CSRFトークンを取得し、ログインAPIにユーザー認証情報を含むPOSTリクエストを送信
+    // CSRFトークンを取得し、ログインAPIにユーザー認証情報を含むPOSTリクエストを送信 
     const postData = async () => {
         axios.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true }).then((res: any) => {
             console.log(res);
