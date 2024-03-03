@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 import axios from 'axios';
 
 // トークンを送信するためのインスタンスを生成
@@ -12,13 +13,15 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
+    const router = useRouter();
 
-    // CSRFトークンを取得し、ログインAPIにユーザー認証情報を含むPOSTリクエストを送信 
+    // CSRFトークンを取得し、ログインAPIにユーザー認証情報を含むPOSTリクエストを送信
     const postData = async () => {
         axios.get('http://localhost:8000/sanctum/csrf-cookie', { withCredentials: true }).then((res: any) => {
-            console.log(res);
+            // console.log(res);
             http.post('/api/login', {email, password, name}).then((res: any) => {
-                console.log(res);
+                // console.log(res);
+                router.push('/');
             })
         });
     }
