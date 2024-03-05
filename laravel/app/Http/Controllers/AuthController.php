@@ -40,4 +40,18 @@ class AuthController extends Controller
 
         return response()->json('Logged out successfuly.', Response::HTTP_OK);
     }
+
+    // ユーザー認証状態のチェック
+    public function status(Request $request) {
+        if (Auth::check()) {
+            $user = Auth::user();
+            return response()->json([
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json('Unauthorized', Response::HTTP_UNAUTHORIZED);
+        }
+    }
 }

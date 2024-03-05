@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import axios from 'axios';
 
@@ -9,7 +9,24 @@ const http = axios.create({
     withCredentials: true,
 })
 
+// ログイン認証状態チェック
+function useRedirectIfAuthenticated() {
+    const router = useRouter();
+    useEffect(() => {
+    async function checkAuth() {
+        try {
+            await http.get('/api/status', { withCredentials: true });
+            router.replace('/');
+        } catch (error) {
+            console.log('ログインできていない')
+        }
+    }
+    checkAuth();
+    }, [router]);
+}
+
 export default function Login() {
+    useRedirectIfAuthenticated();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');

@@ -21,8 +21,11 @@ export default function Home() {
                     },
                 });
                 localStorage.removeItem('authToken');
+                // router.push('/login');
+                console.log('seikou');
+            } else {
+                console.error('Logout failed: No authentication token found in localStorage. This could indicate that the user was not logged in or the token was already removed.');
             }
-            router.push('/login');
         } catch(error) {
             console.log(error);
         }
@@ -33,7 +36,9 @@ export default function Home() {
             <div>
             <button
                 className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded m-3"
-                onClick={logout}
+                onClick={()=>{
+                    logout();
+                }}
             >ログアウト</button>
         </div>
         </main>
