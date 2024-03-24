@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->dateTime('start');
-            $table->dateTime('end')->nullable();
-            $table->boolean('allDay');
+            $table->dateTime('end');
+            $table->boolean('allDay')->nullable();
             $table->timestamps();
         });
     }
