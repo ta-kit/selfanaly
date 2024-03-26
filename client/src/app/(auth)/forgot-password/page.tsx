@@ -8,6 +8,10 @@ import { useAuth } from '@/hooks/auth'
 import { useState } from 'react'
 import AuthSessionStatus from '@/app/(auth)/AuthSessionStatus'
 
+type Errors = {
+    email?: string;
+}
+
 const Page = () => {
     const { forgotPassword } = useAuth({
         middleware: 'guest',
@@ -15,7 +19,7 @@ const Page = () => {
     })
 
     const [email, setEmail] = useState('')
-    const [errors, setErrors] = useState([])
+    const [errors, setErrors] = useState<Errors>({})
     const [status, setStatus] = useState(null)
 
     const submitForm = event => {
@@ -50,7 +54,7 @@ const Page = () => {
                         autoFocus
                     />
 
-                    <InputError messages={errors.email} className="mt-2" />
+                    {errors.email && <InputError messages={[errors.email]} className="mt-2" />}
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
