@@ -3,18 +3,12 @@ import { Menu, Transition } from '@headlessui/react'
 
 const Dropdown = ({
     align = 'right',
-    width = 48,
+    width = 'w-48',
     contentClasses = 'py-1 bg-white',
     trigger,
     children,
 }) => {
     let alignmentClasses
-
-    switch (width) {
-        case '48':
-            width = 'w-48'
-            break
-    }
 
     switch (align) {
         case 'left':
